@@ -1,64 +1,84 @@
 #include "main.h"
-
 /**
- *print_char - function specificateur %c character
- *@args: list of argument to print
- * Return: number of parameters printed
- */
-
+  * print_char - Function to handle the %c specifier (character)
+  * @args: list of arguments to print
+  * Return: number of parameters printed
+*/
 int print_char(va_list args)
 {
-	_putchar(va_args(args, int));
+	_putchar (va_arg(args, int));
 	return (1);
 }
-
 /**
- *print_string - function specificateur %s string
- *@arg: list of argument to print
- *Return: number of parameters
- */
-Int print_string(va_list args)
+  * print_string - Function to handle the %s (string) specifier
+  * @args: list of arguments to print
+  * Return: number of parameters printed
+  */
+int print_string(va_list args)
 {
 	int i = 0;
-	char *string = va _args (args, char*);
+	char *string = va_arg(args, char *);
 
-	if(string == 0)
-		string = "(NULL)";
-	while (string[i] !='\0')
+	if (string == 0)
+	string = "(null)";
+
+	while (string[i] != '\0')
 	{
 		_putchar(string[i]);
 		i++;
 	}
-	return(i);
+	return (i);
 }
 
 /**
- *print_unknown - function specificateur unknown
- *@arg: list of argument to print
- *Return: number of parameters
- */
+  * print_unknown - Function to handle unknown specifier
+  * (prints the character as is)
+  * @args: list of arguments to print
+  * Return: number of parameters printed
+  */
+int print_unknown(va_list args)
+{
+	(void)(args);
+	_putchar('%');
+	return (1);
+}
 
-int print_decimal(va_list args);
+/**
+  * print_decimal - Function to handle the %d (decimal) specifier
+  * @args: list of arguments to print
+  * Return: number of parameters printed
+  */
+int print_decimal(va_list args)
 {
 	int i = 0, signe = 1, count = 0;
 	int buff[10];
 	int n = va_arg(args, int);
+
+
+
 	if (n < INT_MIN || INT_MAX < n)
 	return (-1);
-	/*prints '-' if n negative */
+
+/* print '-' if n negative */
 	if (n < 0)
 	{
 	signe = -1;
 	count += _putchar('-');
 	}
-	/*stores each digit of n (base 10) in an array */
+
+	/* stores each digit of n (base 10) in an array */
 	do {
 	buff[i] = n % 10;
 	n /= 10;
 	i++;
 	} while (n);
-	/* prints table digits */
+
+
+	/* imprime les digits du tableau */
 	for (i--; i >= 0 ; i--)
 		count += _putchar('0' + buff[i] * signe);
+
+
 	return (count);
+
 }
