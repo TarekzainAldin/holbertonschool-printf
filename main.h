@@ -18,8 +18,8 @@ typedef struct CodeFormat_Fonction
 
 int _putchar(char c);
 int _printf(const char *format, ...);
-int print_char(va_list list);
-int print_string(va_list list);
-int print_unknown(va_list list);
+int print_char(va_list args);
+int print_string(va_list args);
+int print_unknown(va_list args);
 int (*Func)(va_list);
 #endif
