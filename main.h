@@ -23,4 +23,6 @@ int print_string(va_list args);
 int print_unknown(va_list args);
 int print_decimal(va_list args);
 int print_i_decimal(va_list args);
+
+int Dec_to_Bin(va_list args);
 #endif

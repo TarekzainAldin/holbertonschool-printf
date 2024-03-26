@@ -14,6 +14,7 @@ TypeDef_CodeFormat_Fonction Tab[] = {
 	{"%", print_unknown},
 	{"d", print_decimal},
 	{"i", print_decimal}
+	{"b", Dec_to_Bin}
 };
 
 if (format == NULL)
