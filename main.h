@@ -1,5 +1,5 @@
-#ifndef _EXISTE_DEJA_
-#define _EXISTE_DEJA_
+#ifndef _MAIN_H
+#define _MAIN_H
 #include <stdarg.h>
 #include <stdio.h>
 #include <unistd.h>
