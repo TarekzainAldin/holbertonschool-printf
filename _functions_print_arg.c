@@ -51,35 +51,38 @@ int print_unknown(va_list args)
   */
 int print_decimal(va_list args)
 {
-	int i = 0, signe = 1, count = 0;
-	int buff[10];
-	int n = va_arg(args, int);
+	unsigned int m;
+	int i = 0, k = 0, n = 0, count = 0;
 
-
-
-	if (n < INT_MIN || INT_MAX < n)
-	return (-1);
-
-/* print '-' if n negative */
-	if (n < 0)
+	n = va_arg(list, int);
+	if (n <= INT_MAX && n >= INT_MIN)
 	{
-	signe = -1;
-	count += _putchar('-');
+		if (n < 0)
+		{
+			n *= -1;
+			_putchar('-');
+			count += 1;
+		}
+		m = n;
+		for (k = 0; (m / 10) > 0; k++)
+			m /= 10;
+
+		m = n;
+		while (k != 0)
+		{
+			for (i = 0; i < k; i++)
+				m /= 10;
+			m %= 10;
+			_putchar(m + '0');
+			count++;
+			k--;
+			m = n;
+		}
+		_putchar(m % 10 + '0');
+		count++;
 	}
-
-	/* stores each digit of n (base 10) in an array */
-	do {
-	buff[i] = n % 10;
-	n /= 10;
-	i++;
-	} while (n);
-
-
-	/* imprime les digits du tableau */
-	for (i--; i >= 0 ; i--)
-		count += _putchar('0' + buff[i] * signe);
-
+	else
+		return (-1);
 
 	return (count);
-
 }
