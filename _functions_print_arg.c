@@ -14,19 +14,21 @@ int print_char(va_list args)
   * @args: list of arguments to print
   * Return: number of parameters printed
   */
-int print_string(va_list args) {
-    int count = 0;
-    char *string = va_arg(args, char *);
+int print_string(va_list args)
+{
+	int count = 0;
+	char *string = va_arg(args, char *);
 
-    if (string == NULL)
-        string = "(null)";
+	if (string == NULL)
+		string = "(null)";
 
-    while (*string != '\0') {
-        _putchar(*string);
-        string++;
-        count++;
-    }
-    return (count);
+	while (*string != '\0')
+	{
+		_putchar(*string);
+		string++;
+		count++;
+	}
+	return (count);
 }
 
 /**
