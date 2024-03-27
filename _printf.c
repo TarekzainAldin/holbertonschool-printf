@@ -2,46 +2,48 @@
 /**
  * _printf - My function printf
  * @format: string to print
- * Return: number of characters printed
+ * Return: number charcarter print
  */
 int _printf(const char *format, ...)
 {
-	va_list args;
-	int i, count = 0;
-	unsigned int j;
-	TypeDef_CodeFormat_Fonction Tab[] = {
-{"c", print_char}, {"s", print_string}, {"%", print_unknown},
-{"d", print_decimal}, {"i", print_decimal}, {"b", Dec_to_Bin},
-{"o", Dec_to_Oct}, {"x", Dec_to_hex}, {"X", Dec_to_HEX}, {"u", Unsigned} };
-	if (format == NULL)
-		return (0);
-	va_start(args, format);
-	for (i = 0; format[i] != '\0'; i++)
-	{
-		if (format[i] == '%' && format[i + 1] != '\0')
+va_list args;
+int i, j, count = 0, decal;
+TypeDef_CodeFormat_Fonction Tab[] = {
+	{"c", print_char},
+	{"s", print_string},
+	{"d", print_decimal}, {"i", print_decimal}, {"u", Unsigned},
+	{"%", print_unknown},
+	{"b", Dec_to_Bin}, {"o", Dec_to_Oct}, {"x", Dec_to_hex}, {"X", Dec_to_HEX},
+{NULL, NULL}
+};
+
+if (format == NULL)
+return (-1);
+va_start(args, format);   /* 1er argument variadique apres argument 'format' */
+for (i = 0; format[i] != 0; i++)     /* boucle sur les caracteres de 'format'*/
+{
+	if (format[i] == '%' && format[i + 1] != '\0') /* si caractere = '%' */
+	{	decal = 0;
+		if (format[i + 1] == ' ')
+			decal = 1;
+		i = i + 1 + decal; /* Passer le caractère '%' et l'éventuel [espace] */
+		for (j = 0; Tab[j].Spe != 0; j++)  /* boucle sur spé */
 		{
-			i++;
-			for (j = 0; j < (sizeof(Tab) / sizeof(Tab[0])); j++)
-			{
-				if (format[i] == *Tab[j].Spe)
-				{count += Tab[j].Func(args);
-					break;
-				}
-			}
-			if (j == sizeof(Tab) / sizeof(Tab[0]))
-			{_putchar('%');
-				count++;
-				if (format[i] != '%')
-				{_putchar(format[i]);
-					count++;
-				}
+			if (format[i] == *Tab[j].Spe)
+			{	count  = count + Tab[j].Func(args);
+				break;
 			}
 		}
-		else
-		{_putchar(format[i]);
-			count++;
+		if (Tab[j].Spe == 0)
+		{	count = count + _putchar(format[i + decal - 1]);
+			count = count + _putchar(format[i + decal]);
 		}
 	}
-	va_end(args);
-	return (count);
+	else if (format[i] == '%' && format[i + 1] == '\0')
+		count = -1;
+	else
+		count = count + _putchar(format[i]);
+}
+va_end(args);
+return (count);
 }
