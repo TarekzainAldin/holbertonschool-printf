@@ -22,9 +22,10 @@ int print_string(va_list args)
 	if (string == NULL)
 		string = "(null)";
 
-	while (string[i] != '\0')
+	while (*string != '\0')
 	{
-		_putchar(string[i]);
+		_putchar(*string);
+		string++;
 		count++;
 	}
 	return (count);
