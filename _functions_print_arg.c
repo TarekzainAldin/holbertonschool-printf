@@ -19,7 +19,7 @@ int print_string(va_list args)
 	int count = 0;
 	char *string = va_arg(args, char *);
 
-	if (string == NULL)
+	if (string == 0)
 		string = "(null)";
 
 	while (string[count] != '\0')
