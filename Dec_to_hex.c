@@ -33,4 +33,4 @@ int Dec_to_hex(va_list args)
 	}
 
 	return (count);
-} 
+}
