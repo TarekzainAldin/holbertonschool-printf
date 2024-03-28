@@ -18,15 +18,15 @@ TypeDef_CodeFormat_Fonction Tab[] = {
 
 if (format == NULL)
 return (-1);
-va_start(args, format);   /* 1er argument variadique apres argument 'format' */
-for (i = 0; format[i] != 0; i++)     /* boucle sur les caracteres de 'format'*/
+va_start(args, format);   /* 1st variadic argument after 'format' argument */
+for (i = 0; format[i] != 0; i++)     /*loop over 'format' characters*/
 {
-	if (format[i] == '%' && format[i + 1] != '\0') /* si caractere = '%' */
+	if (format[i] == '%' && format[i + 1] != '\0') /* if character = '%' */
 	{	decal = 0;
 		if (format[i + 1] == ' ')
 			decal = 1;
-		i = i + 1 + decal; /* Passer le '%' et l'eventuel [espace] */
-		for (j = 0; Tab[j].Spe != 0; j++)  /* boucle sur sp√© */
+		i = i + 1 + decal; /*Pass the '%' and the possible [space] */
+		for (j = 0; Tab[j].Spe != 0; j++)  /* loop on sep pointer© */
 		{
 			if (format[i] == *Tab[j].Spe)
 			{	count  = count + Tab[j].Func(args);
